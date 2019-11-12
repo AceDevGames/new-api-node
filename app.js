@@ -8,13 +8,13 @@ const bodyParser = require('body-parser');
 
 
 const url = 'mongodb+srv://admin:CB1G9H2uA5nbFVLn@busontime-avdnj.mongodb.net/test?retryWrites=true&w=majority'
-const indexRoute = require('./Routes/index');
-const usersRoute = require('./Routes/users');
 const options = {
                     reconnectTries: Number.MAX_VALUE,
                     reconnectInterval: 500,
                     poolSize : 5,
-                    useNewUrlParser: true
+                    useCreateIndex: true,
+                    useNewUrlParser: true,
+                    useUnifiedTopology: true
                 };
 
 mongoose.connect(url, options);
@@ -33,10 +33,11 @@ mongoose.connection.on('connected', () => {
 });
 
 //Body Parser
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+const indexRoute = require('./Routes/index');
+const usersRoute = require('./Routes/users');
 
 
 app.use('/', indexRoute);
