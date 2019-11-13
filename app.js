@@ -2,12 +2,13 @@ const express = require('express');
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+const config = require('./config/config');
 
 
 // string de conexão  =>  mongodb+srv://<username>:<password>@busontime-avdnj.mongodb.net/test?retryWrites=true&w=majority
 
 
-const url = 'mongodb+srv://admin:CB1G9H2uA5nbFVLn@busontime-avdnj.mongodb.net/test?retryWrites=true&w=majority'
+const url = config.bd_string;
 const options = {
                     reconnectTries: Number.MAX_VALUE,
                     reconnectInterval: 500,
